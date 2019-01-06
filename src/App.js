@@ -8,7 +8,34 @@ class App extends Component {
   }
 
   onSaveTodo = (newTodo) => {
-    const nextTodos = this.state.todos.concat(newTodo);
+    const nextTodos = this.state.todos.concat({
+      id: newTodo+Date.now() + Math.random(),
+      title: newTodo,
+      done: false
+    });
+    this.setState({
+      todos: nextTodos
+    });
+  }
+
+  onClickRemove = (todoId) => {
+    const nextTodos = this.state.todos.filter((todo) => {
+      return todo.id !== todoId;
+    });
+    this.setState({
+      todos: nextTodos
+    });
+  }
+
+  onClickDone = (todoId) => {
+    const nextTodos = this.state.todos.map((todo) => {
+      if(todo.id === todoId) {
+        return Object.assign({}, todo, {
+          done: true
+        });
+      }
+      return todo;
+    })
     this.setState({
       todos: nextTodos
     });
@@ -20,6 +47,8 @@ class App extends Component {
         <TodoList
           todos={this.state.todos}
           handleSaveTodo={this.onSaveTodo}
+          handleClickRemove={this.onClickRemove}
+          handleClickDone={this.onClickDone}
         />
       </div>
     );

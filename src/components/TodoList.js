@@ -1,6 +1,7 @@
 import React from 'react';
 import Todo from './Todo';
 
+
 class TodoList extends React.Component {
   state = {
     newTodo: ''
@@ -23,6 +24,14 @@ class TodoList extends React.Component {
     });
   }
 
+  onClickDone = (todoId) => {
+    this.props.handleClickDone(todoId);
+  }
+
+  onClickRemove = (todoId) => {
+    this.props.handleClickRemove(todoId);
+  }
+
   render() {
     const todos = this.props.todos;
 
@@ -38,7 +47,9 @@ class TodoList extends React.Component {
         {todos.map((todo, index) => (
           <Todo 
             todo={todo}
-            key={todo+Date.now() + Math.random()}
+            key={todo.id}
+            handleClickDone={this.onClickDone}
+            handleClickRemove={this.onClickRemove}
           />
         ))}
       </div>
