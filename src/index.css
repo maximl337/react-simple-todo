@@ -16,3 +16,8 @@ code {
 .done {
 	text-decoration: line-through;
 }
+
+.inline {
+	display: inline;
+  list-style-type: none;
+}

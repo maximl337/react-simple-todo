@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import TodoList from './components/TodoList';
+import Stats from './components/Stats';
 
 class App extends Component {
   state = {
@@ -44,6 +45,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Stats todos={this.state.todos} />
         <TodoList
           todos={this.state.todos}
           handleSaveTodo={this.onSaveTodo}
